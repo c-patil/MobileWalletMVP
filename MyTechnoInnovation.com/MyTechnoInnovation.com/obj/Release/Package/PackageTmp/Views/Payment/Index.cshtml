@@ -1,0 +1,80 @@
+﻿@model MyTechnoInnovation.com.Models.PaymentViewModels
+
+@{
+    ViewBag.Title = "Make Payment";
+}
+
+<h2>Make Payment</h2>
+<hr />
+@using (Html.BeginForm("Index", "Payment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.ValidationSummary(true)
+    @*<form class="form-horizontal" role="form">*@
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="amount" class="col-sm-2 control-label">Amount</label>
+
+        <div class="col-sm-10">
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" class="form-control" name="PaymentAmt" id="PaymentAmt" placeholder="Enter Amount">
+            </div>
+            @Html.ValidationMessageFor(m => m.PaymentAmt)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="PaymentDate" class="col-sm-2 control-label">Payment Date</label>
+        <div class='col-sm-10'>
+            <div class='input-group ' id='pymtDate'>
+                <input type='text' id="PaymentDate" name="PaymentDate" placeholder="dd-mm-yyyy" class="form-control date-picker" />
+                <label for="PaymentDate" class="input-group-addon btn">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </label>
+            </div>
+            @Html.ValidationMessageFor(m => m.PaymentAmt)
+        </div>
+
+        @*<div class="control-group">
+                <label for="date-picker-2" class="control-label">B</label>
+                <div class="controls">
+                    <div class="input-group">
+                        <input id="date-picker-2" type="text" class="date-picker form-control" />
+                        <label for="date-picker-2" class="input-group-addon btn">
+                            <span class="glyphicon glyphicon-calendar"></span>
+
+                        </label>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+
+    </div>
+
+    <div class="form-group">
+        <label for="pymtMethod" class="col-sm-2 control-label">Payment Method</label>
+
+        <div class="col-sm-10">
+            <select class="form-control" name="PaymentMethod" id="PaymentMethod">
+                <option value="ApplePay">Apple Pay</option>
+                <option value="AndroidPay">Android Pay</option>
+            </select>
+            @Html.ValidationMessageFor(m => m.PaymentAmt)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+        </div>
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        //$(".date-picker").datepicker();
+    </script>
+}
